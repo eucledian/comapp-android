@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">comapp</string>
+
+    <!-- Success -->
+    <string name="database_success">Record saved</string>
+
+    <!-- Errors -->
+    <string name="auth_error">Your session has expired. Please login again</string>
+    <string name="server_error">There was an error please try again later</string>
+    <string name="database_error">Database error</string>
+    <string name="login_invalid">Invalid user or password</string>
+
+    <!-- Login -->
+    <string name="mail_field">E-mail</string>
+    <string name="password_field">Contraseña</string>
+    <string name="login">Iniciar Sessión</string>
 </resources>
