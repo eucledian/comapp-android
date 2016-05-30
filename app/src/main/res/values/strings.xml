@@ -14,4 +14,7 @@
     <string name="mail_field">E-mail</string>
     <string name="password_field">Contraseña</string>
     <string name="login">Iniciar Sessión</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
