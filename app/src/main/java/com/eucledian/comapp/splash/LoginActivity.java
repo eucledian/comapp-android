@@ -1,5 +1,6 @@
 package com.eucledian.comapp.splash;
 
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -10,9 +11,12 @@ import com.android.volley.VolleyError;
 import com.eucledian.comapp.ApiClientResponse;
 import com.eucledian.comapp.App;
 import com.eucledian.comapp.Config;
+import com.eucledian.comapp.R;
 import com.eucledian.comapp.dao.AppUserDataSource;
 import com.eucledian.comapp.dao.TokenDataSource;
+import com.eucledian.comapp.model.AppUser;
 import com.eucledian.comapp.model.Token;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -92,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void success(ObjectNode response){
         if(setSession(response)) {
-            app.startSessionActivity(this);
+            //app.startSessionActivity(this);
         }else{
             app.invalidLogin();
             loaded();

@@ -1,19 +1,38 @@
 <resources>
-    <string name="app_name">comapp</string>
+    <string name="app_name">CoMapp</string>
+
+    <!-- Actions -->
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Salir</string>
 
     <!-- Success -->
     <string name="database_success">Record saved</string>
 
     <!-- Errors -->
-    <string name="auth_error">Your session has expired. Please login again</string>
     <string name="server_error">There was an error please try again later</string>
     <string name="database_error">Database error</string>
+    <string name="location_error">No location found</string>
     <string name="login_invalid">Invalid user or password</string>
+    <string name="signup_invalid">Existing email address</string>
+    <string name="camera_error">Camera error</string>
+    <string name="camera_unavailable">No camera found</string>
+    <string name="auth_error">Your session has expired. Please login again</string>
 
     <!-- Login -->
     <string name="mail_field">E-mail</string>
     <string name="password_field">Contraseña</string>
     <string name="login">Iniciar Sessión</string>
+
+    <!-- Root -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_drawer_locations">Sucursales</string>
+    <string name="navigation_drawer_cards">Mis Tarjetas</string>
+    <string name="navigation_drawer_redeem">Cash</string>
+    <string name="navigation_drawer_ads">Promociones</string>
+    <string name="navigation_drawer_logout">Cerrar Sesión</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

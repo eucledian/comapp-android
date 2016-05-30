@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- common -->
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
-    <!-- app -->
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimary">#6EBB44</color>
+    <color name="colorPrimaryDark">#003C00</color>
+    <color name="colorAccent">#1D9EDA</color>
+
+    <color name="splashBg">#F4F4F4</color>
+
+    <color name="lightGrey">#F4F4F4</color>
+    <color name="darkGrey">#555555</color>
 </resources>

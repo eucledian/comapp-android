@@ -7,6 +7,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 
 import com.eucledian.comapp.App;
+import com.eucledian.comapp.R;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;

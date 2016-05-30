@@ -2,7 +2,7 @@ package com.eucledian.comapp.root;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eucledian.comapp.App;
+import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.AppUser;
 
 import org.androidannotations.annotations.AfterViews;
@@ -120,7 +121,7 @@ public class RootActivity extends AppCompatActivity implements NavigationView.On
             logout();
         }else{
             Fragment view;
-            switch(id){
+            /**switch(id){
                 case R.id.cards:
                     view = new CardsFragment_();
                     break;
@@ -134,8 +135,8 @@ public class RootActivity extends AppCompatActivity implements NavigationView.On
                 default:
                     view = new LocationsFragment_();
                     break;
-            }
-            replaceFragment(view);
+            }*/
+            //ReplaceFragment(view);
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         return true;
