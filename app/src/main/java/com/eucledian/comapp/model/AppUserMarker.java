@@ -1,21 +1,15 @@
 package com.eucledian.comapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
- * Created by joel on 30/05/16.
+ * Created by gustavo on 5/31/16.
  */
-public class Zone {
+public class AppUserMarker {
 
     private long id;
-
-    private String name;
-
+    private long zoneId;
+    private long markerId;
     private double lat;
-
     private double lng;
-
-    public Zone(){ }
 
     public long getId() {
         return id;
@@ -25,12 +19,20 @@ public class Zone {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public long getZoneId() {
+        return zoneId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setZoneId(long zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public long getMarkerId() {
+        return markerId;
+    }
+
+    public void setMarkerId(long markerId) {
+        this.markerId = markerId;
     }
 
     public double getLat() {

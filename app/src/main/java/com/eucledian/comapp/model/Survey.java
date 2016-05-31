@@ -8,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Survey {
 
-    @JsonIgnore
     private long id;
 
     private long zoneId;
+
+    private boolean isActive;
 
     private String name;
 
@@ -36,6 +37,15 @@ public class Survey {
         this.zoneId = zoneId;
     }
 
+    @JsonProperty("is_active")
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,4 +61,5 @@ public class Survey {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

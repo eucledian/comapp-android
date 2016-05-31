@@ -2,7 +2,16 @@ package com.eucledian.comapp;
 
 
 import com.eucledian.comapp.dao.AppUserDataSource;
+import com.eucledian.comapp.dao.AppUserMarkerDataSource;
+import com.eucledian.comapp.dao.AppUserSurveyDataSource;
+import com.eucledian.comapp.dao.AppUserSurveyResponseDataSource;
+import com.eucledian.comapp.dao.MarkerDataSource;
+import com.eucledian.comapp.dao.SurveyDataSource;
+import com.eucledian.comapp.dao.SurveyFieldDataSource;
+import com.eucledian.comapp.dao.SurveyFieldOptionDataSource;
+import com.eucledian.comapp.dao.SurveyFieldValidationDataSource;
 import com.eucledian.comapp.dao.TokenDataSource;
+import com.eucledian.comapp.dao.ZoneDataSource;
 
 public class Config {
 
@@ -11,11 +20,29 @@ public class Config {
         public static final int VERSION = 1;
         public static final String[] SQL_CREATE_STMT = {
                 TokenDataSource.CREATE_TABLE,
-                AppUserDataSource.CREATE_TABLE
+                AppUserDataSource.CREATE_TABLE,
+                MarkerDataSource.CREATE_TABLE,
+                ZoneDataSource.CREATE_TABLE,
+                SurveyDataSource.CREATE_TABLE,
+                SurveyFieldDataSource.CREATE_TABLE,
+                SurveyFieldOptionDataSource.CREATE_TABLE,
+                SurveyFieldValidationDataSource.CREATE_TABLE,
+                AppUserMarkerDataSource.CREATE_TABLE,
+                AppUserSurveyDataSource.CREATE_TABLE,
+                AppUserSurveyResponseDataSource.CREATE_TABLE
         };
         public static final String[] SQL_DELETE_STMT = {
                 TokenDataSource.DROP_TABLE,
-                AppUserDataSource.DROP_TABLE
+                AppUserDataSource.DROP_TABLE,
+                MarkerDataSource.DROP_TABLE,
+                ZoneDataSource.DROP_TABLE,
+                SurveyDataSource.DROP_TABLE,
+                SurveyFieldDataSource.DROP_TABLE,
+                SurveyFieldOptionDataSource.DROP_TABLE,
+                SurveyFieldValidationDataSource.DROP_TABLE,
+                AppUserMarkerDataSource.DROP_TABLE,
+                AppUserSurveyDataSource.DROP_TABLE,
+                AppUserSurveyResponseDataSource.DROP_TABLE
         };
     }
     public static final class Location{
@@ -57,27 +84,15 @@ public class Config {
         public static final String IMAGE = "/media";
         public static final class Urls{
             public static final class Users{
-                public static final String LOGIN = "/users/login.json";
-                public static final String SIGNUP = "/users/signup.json";
-                public static final String ME = "/users/me.json";
+                public static final String LOGIN = "/users/login";
             }
-            public static final class Locations{
-                public static final String LIST = "/locations.json";
-                public static final String NEAR = "/locations/near.json";
+            public static final class Surveys{
+                public static final String LIST = "/surveys";
+                public static final String SYNC = "/surveys/:survey_id";
             }
-            public static final class Cards{
-                public static final String LIST = "/cards.json";
-                public static final String CREATE = "/cards/create.json";
-            }
-            public static final class Ads{
-                public static final String LIST = "/ads.json";
-            }
-            public static final class Beacons{
-                public static final String RANGE = "/beacons/range.json";
-            }
-            public static final class Transactions{
-                public static final String CREATE = "/transactions/create.json";
-                public static final String SHOW = "/transactions/show.json";
+            public static final class Markers{
+                public static final String LIST = "/markers";
+                public static final String SYNC = "/markers";
             }
         }
     }

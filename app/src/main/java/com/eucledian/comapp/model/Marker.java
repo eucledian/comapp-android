@@ -8,12 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Marker {
 
-    @JsonIgnore
     private long id;
 
     private String name;
 
-    private String imageUrl;
+    private String iconUrl;
 
     public Marker(){ }
 
@@ -33,12 +32,12 @@ public class Marker {
         this.name = name;
     }
 
-    @JsonProperty("image_url")
-    public String getImageUrl() {
-        return imageUrl;
+    @JsonProperty("icon_url")
+    public String getIconUrl() {
+        return iconUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 }

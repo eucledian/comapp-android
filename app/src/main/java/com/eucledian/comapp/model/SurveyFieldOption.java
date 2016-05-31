@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SurveyFieldOption {
 
-    @JsonIgnore
     private long id;
 
     private long surveyFieldId;
