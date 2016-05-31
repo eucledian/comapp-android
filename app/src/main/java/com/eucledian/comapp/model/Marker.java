@@ -4,20 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by joel on 29/05/16.
+ * Created by joel on 30/05/16.
  */
-public class Survey {
+public class Marker {
 
     @JsonIgnore
     private long id;
 
-    private long zoneId;
-
     private String name;
 
-    private String description;
+    private String imageUrl;
 
-    public Survey(){ }
+    public Marker(){ }
 
     public long getId() {
         return id;
@@ -25,15 +23,6 @@ public class Survey {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @JsonProperty("zone_id")
-    public long getZoneId() {
-        return zoneId;
-    }
-
-    public void setZoneId(long zoneId) {
-        this.zoneId = zoneId;
     }
 
     public String getName() {
@@ -44,11 +33,12 @@ public class Survey {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    @JsonProperty("image_url")
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

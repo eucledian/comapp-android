@@ -24,7 +24,6 @@ public class AppUser {
         return id;
     }
 
-    //@JsonProperty("id")
     public void setId(long id) {
         this.id = id;
     }
@@ -33,7 +32,6 @@ public class AppUser {
         return name;
     }
 
-    //@JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
@@ -51,7 +49,6 @@ public class AppUser {
         return mail;
     }
 
-    //@JsonProperty("mail")
     public void setMail(String mail) {
         this.mail = mail;
     }
