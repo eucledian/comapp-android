@@ -20,31 +20,23 @@
 
     <LinearLayout
         android:id="@+id/splashActions"
-        android:visibility="gone"
         android:orientation="vertical"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/splashLogo"
-        android:layout_marginTop="@dimen/activity_vertical_margin" >
-<!--
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrarse"
-            android:id="@+id/signUpBtn"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white" /> -->
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Iniciar Sesión"
+            android:text="@string/login"
             android:id="@+id/loginBtn"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginTop="25dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:background="@color/colorAccent"
             android:textColor="@color/white" />
-
     </LinearLayout>
 </RelativeLayout>

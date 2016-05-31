@@ -18,6 +18,7 @@ import com.eucledian.comapp.dao.AppUserDataSource;
 import com.eucledian.comapp.dao.TokenDataSource;
 import com.eucledian.comapp.model.AppUser;
 import com.eucledian.comapp.model.Token;
+import com.eucledian.comapp.root.RootActivity_;
 import com.eucledian.comapp.splash.LoginActivity_;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -219,12 +220,11 @@ public class App {
         context.startActivity(intent);
     }
 
-    /**
+
     public void startRootActivity(Activity context){
         Intent intent = new Intent(context, RootActivity_.class);
         context.startActivity(intent);
     }
-     */
 
     public boolean hasSession() {
         return getAuthToken() != null;

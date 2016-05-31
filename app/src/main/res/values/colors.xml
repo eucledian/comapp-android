@@ -3,9 +3,9 @@
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
 
-    <color name="colorPrimary">#6EBB44</color>
-    <color name="colorPrimaryDark">#003C00</color>
-    <color name="colorAccent">#1D9EDA</color>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#D84315</color>
+    <color name="colorAccent">#448AFF</color>
 
     <color name="splashBg">#F4F4F4</color>
 
