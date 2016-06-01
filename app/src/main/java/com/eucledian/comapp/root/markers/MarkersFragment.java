@@ -60,9 +60,13 @@ public class MarkersFragment extends Fragment implements RecyclerItemClicked{
     }
 
     private void doQuery(){
+        loading();
+        dao.open();
         ArrayList<Marker> list = dao.getElements();
+        dao.close();
         adapter.setItems(list);
         adapter.notifyDataSetChanged();
+        loaded();
     }
 
     private void loading() {
