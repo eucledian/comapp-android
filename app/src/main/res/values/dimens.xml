@@ -10,5 +10,6 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="text_size_title">18dp</dimen>
+    <dimen name="text_size_small">12dp</dimen>
     <dimen name="text_size_description">12dp</dimen>
 </resources>

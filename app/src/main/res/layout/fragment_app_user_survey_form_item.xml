@@ -15,12 +15,22 @@
         android:visibility="gone"
         android:id="@+id/surveyFieldEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:singleLine="true"/>
 
     <Spinner
         android:visibility="gone"
         android:id="@+id/surveyFieldSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/surveyFieldErrorText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/error"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"/>
 
 </LinearLayout>

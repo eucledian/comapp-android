@@ -6,6 +6,7 @@ package com.eucledian.comapp.model;
 public class AppUserSurveyResponse {
 
     private long id;
+    private int appUserSurveyId;
     private long surveyFieldId;
     private String response;
 
@@ -31,5 +32,13 @@ public class AppUserSurveyResponse {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    public int getAppUserSurveyId() {
+        return appUserSurveyId;
+    }
+
+    public void setAppUserSurveyId(int appUserSurveyId) {
+        this.appUserSurveyId = appUserSurveyId;
     }
 }

@@ -14,9 +14,10 @@ import org.androidannotations.annotations.EBean;
 @EBean
 public class AppUserSurveyResponseDataSource extends DataSource {
 
-    public static final String CREATE_TABLE = "CREATE TABLE app_user_survey_responses(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, survey_field_id, response)";
+    public static final String CREATE_TABLE = "CREATE TABLE app_user_survey_responses(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, app_user_survey_id, survey_field_id, response)";
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS app_user_survey_responses";
     private static final String COLUMN_ID = "id";
+    private static final String COLUMN_APP_USER_SURVEY_ID = "app_user_survey_id";
     private static final String COLUMN_SURVEY_FIELD_ID = "survey_field_id";
     private static final String COLUMN_RESPONSE = "response";
     private static final String TABLE_NAME = "app_user_survey_responses";
@@ -25,6 +26,7 @@ public class AppUserSurveyResponseDataSource extends DataSource {
 
     public long insertElement(AppUserSurveyResponse element){
         ContentValues values = new ContentValues();
+        values.put(COLUMN_APP_USER_SURVEY_ID, element.getAppUserSurveyId());
         values.put(COLUMN_SURVEY_FIELD_ID, element.getSurveyFieldId());
         values.put(COLUMN_RESPONSE, element.getResponse());
         return getDb().insert(TABLE_NAME, null, values);
@@ -38,6 +40,7 @@ public class AppUserSurveyResponseDataSource extends DataSource {
         AppUserSurveyResponse el = new AppUserSurveyResponse();
         int i = 0;
         el.setId(c.getLong(i));
+        el.setAppUserSurveyId(c.getInt(++i));
         el.setSurveyFieldId(c.getLong(++i));
         el.setResponse(c.getString(++i));
         return el;

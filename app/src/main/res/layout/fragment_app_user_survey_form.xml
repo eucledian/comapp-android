@@ -18,6 +18,7 @@
         android:name="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
         tools:listitem="@layout/fragment_app_user_survey_form_item" />
 

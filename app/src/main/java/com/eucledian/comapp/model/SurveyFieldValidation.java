@@ -8,6 +8,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class SurveyFieldValidation {
 
+    public static final class Identity{
+        public static final int PRESENCE = 0;
+        public static final int LENGTH = 1;
+        public static final int NUMERICALITY = 2;
+        public static final int INCLUSION = 3;
+        public static final int EXCLUSION = 4;
+        public static final int UNIQUENESS = 5;
+        public static final int FORMAT = 6;
+        public static final int CONFIRMATION = 7;
+    }
+
     private long id;
 
     private long surveyFieldId;

@@ -1,5 +1,6 @@
 package com.eucledian.comapp.model;
 
+import com.eucledian.comapp.adapter.view.SurveyFieldItemView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -26,6 +27,22 @@ public class SurveyField {
         this.validations = validations;
     }
 
+    public AppUserSurveyResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(AppUserSurveyResponse response) {
+        this.response = response;
+    }
+
+    public SurveyFieldItemView getView() {
+        return view;
+    }
+
+    public void setView(SurveyFieldItemView view) {
+        this.view = view;
+    }
+
     public static final class Identity{
         public static final int TEXT = 0;
         public static final int SELECT = 4;
@@ -48,6 +65,12 @@ public class SurveyField {
 
     @JsonIgnore
     private ArrayList<SurveyFieldValidation> validations;
+
+    @JsonIgnore
+    private AppUserSurveyResponse response;
+
+    @JsonIgnore
+    private SurveyFieldItemView view;
 
     @JsonProperty("survey_id")
     public long getSurveyId() {

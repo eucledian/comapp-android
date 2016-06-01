@@ -50,6 +50,13 @@
 
     <!-- App User Surveys -->
     <string name="app_user_survey_submit">Guardar</string>
+    <string name="app_user_survey_save_error">No fue posible guardar la encuesta. Por favor intente más tarde.</string>
+
+    <!-- validations -->
+    <string name="validation_presence">es requerido</string>
+    <string name="validation_length_minimum">mínimo %1$d caracteres</string>
+    <string name="validation_length_maximum">máximo %1$d caracteres</string>
+    <string name="validation_length_is">exactamente %1$d caracteres</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

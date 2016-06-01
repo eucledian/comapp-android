@@ -3,6 +3,7 @@ package com.eucledian.comapp.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.eucledian.comapp.model.AppUserSurveyResponse;
 import com.eucledian.comapp.model.SurveyField;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,10 +48,14 @@ public class SurveyFieldDataSource extends DataSource {
         Cursor c = getDb().query(TABLE_NAME, columns, "survey_id=" + surveyId, null, null, null, "position ASC", null);
         ArrayList<SurveyField> results = new ArrayList<SurveyField>();
         SurveyField el = null;
+        AppUserSurveyResponse response;
         while (c.moveToNext()){
             el = cursorToElement(c);
             el.setOptions(surveyFieldOptionDataSource.getElementsBySurveyField(el.getId()));
             el.setValidations(surveyFieldValidationDataSource.getElementsBySurveyField(el.getId()));
+            response = new AppUserSurveyResponse();
+            response.setSurveyFieldId(el.getId());
+            el.setResponse(response);
             results.add(el);
         }
         c.close();
