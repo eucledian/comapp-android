@@ -8,7 +8,6 @@ import android.database.SQLException;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -136,15 +135,8 @@ public class App {
     }
 
     public String getDeviceId() {
-        String uuid;
-        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-        uuid = manager.getDeviceId();
-        if (uuid == null || uuid.length() == 0) {
-            uuid = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        }
-
-        return uuid;
+        String deviceId = Settings.Secure.ANDROID_ID;
+        return deviceId;
     }
 
     public void hideKeyboard(Activity context){

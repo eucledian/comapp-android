@@ -86,7 +86,7 @@ public class ApiClient {
         params.put(Params.Device.UUID, getApp().getDeviceId());
         params.put(Params.Device.Vendor, android.os.Build.MANUFACTURER);
         params.put(Params.Device.Name, android.os.Build.MODEL);
-        params.put(Params.NOTIFICATION_TOKEN, getApp().getNotificationToken());
+        //params.put(Params.NOTIFICATION_TOKEN, getApp().getNotificationToken());
         return params;
     }
 

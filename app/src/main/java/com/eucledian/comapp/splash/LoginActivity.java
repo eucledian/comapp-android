@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void success(ObjectNode response){
         if(setSession(response)) {
-            //app.startSessionActivity(this);
+            app.startRootActivity(this);
         }else{
             app.invalidLogin();
             loaded();

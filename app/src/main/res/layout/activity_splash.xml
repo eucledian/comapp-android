@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:id="@+id/loginBtn"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:background="@color/colorAccent"
         android:textColor="@color/white"
