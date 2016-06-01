@@ -1,8 +1,11 @@
 package com.eucledian.comapp.root.markers;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,7 +64,15 @@ public class AppUserMarkerMapActivity extends AppCompatActivity implements Googl
     protected void init() {
         appMarker = dao.fromArgs(getIntent().getExtras());
         initClient();
-        mapFragment.getMapAsync(this);
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(isConnected){
+            mapFragment.getMapAsync(this);
+        }
     }
 
     private void initClient() {

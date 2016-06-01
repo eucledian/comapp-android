@@ -2,6 +2,7 @@ package com.eucledian.comapp.splash;
 
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -57,8 +58,12 @@ public class LoginActivity extends AppCompatActivity {
     @ViewById
     protected TextView loginPasswordText;
 
+    @ViewById
+    protected Toolbar toolbar;
+
     @AfterViews
     protected void init(){
+        setSupportActionBar(toolbar);
         app.initAuthToken(this);
         if(app.hasSession()){
             //app.startOnBoardingActivity(this);

@@ -2,6 +2,7 @@ package com.eucledian.comapp.root.markers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -36,6 +37,9 @@ public class AppUserMarkerActivity extends AppCompatActivity implements AdapterV
     @Bean
     protected App app;
 
+    @ViewById
+    protected Toolbar toolbar;
+
     @Bean
     protected AppUserMarkerDataSource dao;
 
@@ -55,6 +59,7 @@ public class AppUserMarkerActivity extends AppCompatActivity implements AdapterV
 
     @AfterViews
     protected void init(){
+        setSupportActionBar(toolbar);
         Bundle args = getIntent().getExtras();
         marker = dao.fromArgs(args);
         initText();
