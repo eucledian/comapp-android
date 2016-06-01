@@ -18,6 +18,9 @@ public class Survey {
 
     private String description;
 
+    @JsonIgnore
+    private Zone zone;
+
     public Survey(){ }
 
     public long getId() {
@@ -62,4 +65,11 @@ public class Survey {
         this.description = description;
     }
 
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
 }

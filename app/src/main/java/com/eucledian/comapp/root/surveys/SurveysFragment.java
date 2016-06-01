@@ -10,7 +10,9 @@ import com.eucledian.comapp.R;
 import com.eucledian.comapp.adapter.RecyclerItemClicked;
 import com.eucledian.comapp.adapter.SurveyAdapter;
 import com.eucledian.comapp.dao.SurveyDataSource;
+import com.eucledian.comapp.dao.ZoneDataSource;
 import com.eucledian.comapp.model.Survey;
+import com.eucledian.comapp.root.RootActivity;
 import com.eucledian.comapp.util.views.EnhancedRecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -29,6 +31,9 @@ public class SurveysFragment extends Fragment implements RecyclerItemClicked {
     @Bean
     protected SurveyDataSource dao;
 
+    @Bean
+    protected ZoneDataSource zoneDataSource;
+
     @ViewById
     protected TextView emptyListText;
 
@@ -44,7 +49,6 @@ public class SurveysFragment extends Fragment implements RecyclerItemClicked {
 
     @AfterViews
     protected void init() {
-        //activity = (RootActivity) getActivity();
         adapter.setOnRecyclerItemClickedListener(this);
         surveysList.setEmptyView(emptyListText);
         surveysList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -61,8 +65,10 @@ public class SurveysFragment extends Fragment implements RecyclerItemClicked {
     private void doQuery(){
         loading();
         dao.open();
-        ArrayList<Survey> list = dao.getElements();
+        zoneDataSource.open();
+        ArrayList<Survey> list = dao.getElements(zoneDataSource);
         dao.close();
+        zoneDataSource.close();
         adapter.setItems(list);
         adapter.notifyDataSetChanged();
         loaded();
@@ -72,19 +78,22 @@ public class SurveysFragment extends Fragment implements RecyclerItemClicked {
         emptyListText.setVisibility(View.GONE);
         surveysLoadingView.setVisibility(View.VISIBLE);
         surveysList.setVisibility(View.GONE);
-        //activity.fab.setVisibility(View.GONE);
     }
 
     private void loaded() {
         surveysLoadingView.setVisibility(View.GONE);
         surveysList.setVisibility(View.VISIBLE);
-        //activity.fab.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        // TODO start app_user_survey
+        AppUserSurveyFormFragment_ fragment = new AppUserSurveyFormFragment_();
+        Survey element = adapter.getItem(position);
+        RootActivity activity = (RootActivity) getActivity();
+
+        fragment.setArguments(dao.toArgs(element));
+        activity.replaceFragment(fragment);
     }
 
 }

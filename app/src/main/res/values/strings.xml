@@ -48,6 +48,9 @@
     <string name="sync_fetch_zones_error">No fue posible recuperar las zonas</string>
     <string name="sync_success">Se ha completado la sincronización</string>
 
+    <!-- App User Surveys -->
+    <string name="app_user_survey_submit">Guardar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

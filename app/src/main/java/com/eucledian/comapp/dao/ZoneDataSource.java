@@ -23,12 +23,26 @@ public class ZoneDataSource extends DataSource {
     private static final String COLUMN_LAT = "lat";
     private static final String COLUMN_LNG = "lng";
     private static final String TABLE_NAME = "zones";
-
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_NAME,
+            COLUMN_LAT,
+            COLUMN_LNG
+    };
 
     public ZoneDataSource(){}
 
     public Zone getElement(ObjectNode tree, ObjectMapper mapper) throws JsonProcessingException {
         return mapper.treeToValue(tree, Zone.class);
+    }
+
+    public Zone getElementById(long id){
+        Zone element = null;
+        Cursor c = getDb().query(TABLE_NAME, columns, "id = " + id, null, null, null, null, null);
+        if (c.moveToNext()){
+            element = cursorToElement(c);
+        }
+        return element;
     }
 
     public long insertElement(Zone element){

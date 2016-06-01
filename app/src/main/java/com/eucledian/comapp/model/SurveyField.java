@@ -3,10 +3,33 @@ package com.eucledian.comapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 /**
  * Created by joel on 30/05/16.
  */
 public class SurveyField {
+
+    public ArrayList<SurveyFieldOption> getOptions() {
+        return options;
+    }
+
+    public void setOptions(ArrayList<SurveyFieldOption> options) {
+        this.options = options;
+    }
+
+    public ArrayList<SurveyFieldValidation> getValidations() {
+        return validations;
+    }
+
+    public void setValidations(ArrayList<SurveyFieldValidation> validations) {
+        this.validations = validations;
+    }
+
+    public static final class Identity{
+        public static final int TEXT = 0;
+        public static final int SELECT = 4;
+    }
 
     private long id;
 
@@ -19,6 +42,12 @@ public class SurveyField {
     private int identity;
 
     private String name;
+
+    @JsonIgnore
+    private ArrayList<SurveyFieldOption> options;
+
+    @JsonIgnore
+    private ArrayList<SurveyFieldValidation> validations;
 
     @JsonProperty("survey_id")
     public long getSurveyId() {

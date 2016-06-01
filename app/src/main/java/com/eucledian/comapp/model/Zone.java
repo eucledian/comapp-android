@@ -8,11 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Zone {
 
     private long id;
-
     private String name;
-
     private double lat;
-
     private double lng;
 
     public Zone(){ }

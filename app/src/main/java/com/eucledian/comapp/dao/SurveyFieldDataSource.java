@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -25,11 +27,34 @@ public class SurveyFieldDataSource extends DataSource {
     private static final String COLUMN_IDENTITY = "identity";
     private static final String COLUMN_NAME = "name";
     private static final String TABLE_NAME = "survey_fields";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_SURVEY_ID,
+            COLUMN_POSITION,
+            COLUMN_DATA_TYPE,
+            COLUMN_IDENTITY,
+            COLUMN_NAME
+    };
+
 
     public SurveyFieldDataSource(){}
 
     public SurveyField getElement(ObjectNode tree, ObjectMapper mapper) throws JsonProcessingException {
         return mapper.treeToValue(tree, SurveyField.class);
+    }
+
+    public ArrayList<SurveyField> getElementsBySurvey(long surveyId, SurveyFieldOptionDataSource surveyFieldOptionDataSource, SurveyFieldValidationDataSource surveyFieldValidationDataSource) {
+        Cursor c = getDb().query(TABLE_NAME, columns, "survey_id=" + surveyId, null, null, null, "position ASC", null);
+        ArrayList<SurveyField> results = new ArrayList<SurveyField>();
+        SurveyField el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            el.setOptions(surveyFieldOptionDataSource.getElementsBySurveyField(el.getId()));
+            el.setValidations(surveyFieldValidationDataSource.getElementsBySurveyField(el.getId()));
+            results.add(el);
+        }
+        c.close();
+        return results;
     }
 
     public long insertElement(SurveyField element){

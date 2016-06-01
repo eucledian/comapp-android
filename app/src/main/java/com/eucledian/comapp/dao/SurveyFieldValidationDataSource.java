@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -23,11 +25,30 @@ public class SurveyFieldValidationDataSource extends DataSource {
     private static final String COLUMN_IDENTITY = "identity";
     private static final String COLUMN_VALIDATION_ARGS = "validation_args";
     private static final String TABLE_NAME = "survey_field_validations";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_SURVEY_FIELD_ID,
+            COLUMN_IDENTITY,
+            COLUMN_VALIDATION_ARGS
+    };
+
 
     public SurveyFieldValidationDataSource(){}
 
     public SurveyFieldValidation getElement(ObjectNode tree, ObjectMapper mapper) throws JsonProcessingException {
         return mapper.treeToValue(tree, SurveyFieldValidation.class);
+    }
+
+    public ArrayList<SurveyFieldValidation> getElementsBySurveyField(long surveyFieldId) {
+        Cursor c = getDb().query(TABLE_NAME, columns, "survey_field_id=" + surveyFieldId, null, null, null, null, null);
+        ArrayList<SurveyFieldValidation> results = new ArrayList<SurveyFieldValidation>();
+        SurveyFieldValidation el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
     }
 
     public long insertElement(SurveyFieldValidation element){

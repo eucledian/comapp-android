@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/surveyDescriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_description"
+        android:textColor="@color/darkGrey" />
+
+    <com.eucledian.comapp.util.views.EnhancedRecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/surveyFieldList"
+        android:name="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
+        tools:listitem="@layout/fragment_app_user_survey_form_item" />
+
+    <Button
+        android:id="@+id/surveyFormSubmitBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_user_survey_submit"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white" />
+
+</LinearLayout>

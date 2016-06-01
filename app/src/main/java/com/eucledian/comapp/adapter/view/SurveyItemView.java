@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.Survey;
+import com.eucledian.comapp.model.Zone;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -27,7 +28,10 @@ public class SurveyItemView extends LinearLayout {
     }
 
     public void bind(Survey item){
+        Zone zone = item.getZone();
         surveyNameText.setText(item.getName());
-        surveyZoneText.setText("Zone Query");
+        if(zone != null){
+            surveyZoneText.setText(zone.getName());
+        }
     }
 }

@@ -2,8 +2,10 @@ package com.eucledian.comapp.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Bundle;
 
 import com.eucledian.comapp.model.Survey;
+import com.eucledian.comapp.model.Zone;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -30,7 +32,9 @@ public class SurveyDataSource extends DataSource {
     private String[] columns = {
             COLUMN_ID,
             COLUMN_ZONE_ID,
-            COLUMN_NAME
+            COLUMN_IS_ACTIVE,
+            COLUMN_NAME,
+            COLUMN_DESCRIPTION
     };
 
     public SurveyDataSource(){}
@@ -49,12 +53,14 @@ public class SurveyDataSource extends DataSource {
         return getDb().insert(TABLE_NAME, null, values);
     }
 
-    public ArrayList<Survey> getElements() {
+    public ArrayList<Survey> getElements(ZoneDataSource zoneDataSource) {
         Cursor c = getDb().query(TABLE_NAME, columns, null, null, null, null, null, null);
         ArrayList<Survey> results = new ArrayList<Survey>();
         Survey el = null;
         while (c.moveToNext()){
             el = cursorToElement(c);
+            Zone zone = zoneDataSource.getElementById(el.getZoneId());
+            el.setZone(zone);
             results.add(el);
         }
         c.close();
@@ -74,6 +80,30 @@ public class SurveyDataSource extends DataSource {
         el.setName(c.getString(++i));
         el.setDescription(c.getString(++i));
         return el;
+    }
+
+    public Bundle toArgs(Survey element){
+        Bundle bundle = new Bundle();
+
+        bundle.putLong(COLUMN_ID, element.getId());
+        bundle.putLong(COLUMN_ZONE_ID, element.getZoneId());
+        bundle.putBoolean(COLUMN_IS_ACTIVE, element.isActive());
+        bundle.putString(COLUMN_NAME, element.getName());
+        bundle.putString(COLUMN_DESCRIPTION, element.getDescription());
+
+        return bundle;
+    }
+
+    public Survey fromBundle(Bundle args){
+        Survey element = new Survey();
+
+        element.setId(args.getLong(COLUMN_ID));
+        element.setZoneId(args.getLong(COLUMN_ZONE_ID));
+        element.setIsActive(args.getBoolean(COLUMN_IS_ACTIVE));
+        element.setName(args.getString(COLUMN_NAME));
+        element.setDescription(args.getString(COLUMN_DESCRIPTION));
+
+        return element;
     }
 
 }
