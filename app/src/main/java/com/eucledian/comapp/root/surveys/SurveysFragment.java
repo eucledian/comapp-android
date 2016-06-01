@@ -59,9 +59,13 @@ public class SurveysFragment extends Fragment implements RecyclerItemClicked {
     }
 
     private void doQuery(){
+        loading();
+        dao.open();
         ArrayList<Survey> list = dao.getElements();
+        dao.close();
         adapter.setItems(list);
         adapter.notifyDataSetChanged();
+        loaded();
     }
 
     private void loading() {
