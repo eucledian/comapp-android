@@ -2,6 +2,7 @@ package com.eucledian.comapp.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Bundle;
 
 import com.eucledian.comapp.model.Marker;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -69,6 +70,22 @@ public class MarkerDataSource extends DataSource {
         el.setName(c.getString(++i));
         el.setIconUrl(c.getString(++i));
         return el;
+    }
+
+    public Bundle toArgs(Marker element){
+        Bundle b = new Bundle();
+        b.putLong(COLUMN_ID, element.getId());
+        b.putString(COLUMN_NAME, element.getName());
+        b.putString(COLUMN_ICON_URL, element.getIconUrl());
+        return b;
+    }
+
+    public Marker fromArgs(Bundle args){
+        Marker element = new Marker();
+        element.setId(args.getLong(COLUMN_ID));
+        element.setName(args.getString(COLUMN_NAME));
+        element.setIconUrl(args.getString(COLUMN_ICON_URL));
+        return element;
     }
 
 }

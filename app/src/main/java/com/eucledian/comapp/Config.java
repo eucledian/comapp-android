@@ -96,6 +96,6 @@ public class Config {
             }
         }
     }
-    public static final String LOG_TAG = "rewards";
+    public static final String LOG_TAG = "comapp";
 
 }

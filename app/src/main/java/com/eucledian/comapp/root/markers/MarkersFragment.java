@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.eucledian.comapp.App;
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.adapter.MarkerAdapter;
 import com.eucledian.comapp.adapter.RecyclerItemClicked;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 @EFragment(R.layout.fragment_markers)
 public class MarkersFragment extends Fragment implements RecyclerItemClicked{
 
+    @Bean
+    protected App app;
 
     @Bean
     protected MarkerAdapter adapter;
@@ -45,17 +48,10 @@ public class MarkersFragment extends Fragment implements RecyclerItemClicked{
 
     @AfterViews
     protected void init() {
-        //activity = (RootActivity) getActivity();
         adapter.setOnRecyclerItemClickedListener(this);
         markersList.setEmptyView(emptyListText);
         markersList.setLayoutManager(new LinearLayoutManager(getActivity()));
         markersList.setAdapter(adapter);
-        /**activity.fab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        activity.replaceFragment(new NewCardFragment_());
-        }
-        });*/
         doQuery();
     }
 
@@ -85,6 +81,6 @@ public class MarkersFragment extends Fragment implements RecyclerItemClicked{
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        // TODO start app_user_marker
+        app.startAppUserMarkerActivity(getActivity(), dao.toArgs(adapter.getItem(position)));
     }
 }
