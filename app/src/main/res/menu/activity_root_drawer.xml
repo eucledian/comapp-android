@@ -2,14 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/locations" android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="@string/navigation_drawer_locations" />
-        <item android:id="@+id/cards" android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="@string/navigation_drawer_cards" />
-        <item android:id="@+id/redeem" android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="@string/navigation_drawer_redeem" />
-        <item android:id="@+id/ads" android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="@string/navigation_drawer_ads" />
+        <item android:id="@+id/markers" android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="@string/navigation_drawer_markers" />
+        <item android:id="@+id/surveys" android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="@string/navigation_drawer_surveys" />
+        <item android:id="@+id/sync" android:icon="@android:drawable/ic_lock_idle_lock"
+            android:title="@string/navigation_drawer_sync" />
     </group>
 
     <item android:title="Opciones">

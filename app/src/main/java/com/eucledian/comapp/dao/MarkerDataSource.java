@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -23,6 +25,11 @@ public class MarkerDataSource extends DataSource {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_ICON_URL = "icon_url";
     private static final String TABLE_NAME = "markers";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_NAME,
+            COLUMN_ICON_URL
+    };
 
     public MarkerDataSource(){}
 
@@ -37,6 +44,19 @@ public class MarkerDataSource extends DataSource {
         values.put(COLUMN_ICON_URL, element.getIconUrl());
         return getDb().insert(TABLE_NAME, null, values);
     }
+
+    public ArrayList<Marker> getElements() {
+        Cursor c = getDb().query(TABLE_NAME, columns, null, null, null, null, null, null);
+        ArrayList<Marker> results = new ArrayList<Marker>();
+        Marker el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
+    }
+
 
     public int deleteAllElements(){
         return getDb().delete(TABLE_NAME, null, null);

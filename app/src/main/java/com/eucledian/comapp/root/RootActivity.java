@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.eucledian.comapp.App;
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.AppUser;
+import com.eucledian.comapp.root.surveys.SurveysFragment_;
+import com.eucledian.comapp.root.sync.SyncFragment_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -121,22 +123,19 @@ public class RootActivity extends AppCompatActivity implements NavigationView.On
             logout();
         }else{
             Fragment view;
-            /**switch(id){
-                case R.id.cards:
-                    view = new CardsFragment_();
+            switch(id){
+                case R.id.surveys:
+                    view = new SurveysFragment_();
                     break;
-                case R.id.redeem:
-                    view = new RedeemFragment_();
+                case R.id.sync:
+                    view = new SyncFragment_();
                     break;
-                case R.id.ads:
-                    view = new AdsFragment_();
-                    break;
-                case R.id.locations:
+                case R.id.markers:
                 default:
-                    view = new LocationsFragment_();
+                    view = new SurveysFragment_();
                     break;
-            }*/
-            //ReplaceFragment(view);
+            }
+            replaceFragment(view);
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         return true;

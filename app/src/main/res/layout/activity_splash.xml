@@ -18,25 +18,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:id="@+id/splashActions"
-        android:orientation="vertical"
-        android:visibility="gone"
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splashLogo"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/login"
+        android:id="@+id/loginBtn"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
         android:layout_alignParentBottom="true"
-        android:gravity="bottom">
+        android:layout_alignParentEnd="true" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:id="@+id/loginBtn"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:background="@color/colorAccent"
-            android:textColor="@color/white" />
-    </LinearLayout>
 </RelativeLayout>

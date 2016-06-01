@@ -27,12 +27,21 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="navigation_drawer_locations">Sucursales</string>
-    <string name="navigation_drawer_cards">Mis Tarjetas</string>
-    <string name="navigation_drawer_redeem">Cash</string>
-    <string name="navigation_drawer_ads">Promociones</string>
+    <string name="navigation_drawer_markers">Marcadores</string>
+    <string name="navigation_drawer_surveys">Encuestas</string>
+    <string name="navigation_drawer_sync">Sincronización</string>
     <string name="navigation_drawer_logout">Cerrar Sesión</string>
 
+    <!-- Surveys -->
+    <string name="surveys_empty">No hay encuestas.</string>
+
+    <!-- Markers -->
+    <string name="markers_empty">No hay marcadores.</string>
+
+    <!-- Sync -->
+    <string name="sync">Sincronizar</string>
+    <string name="sync_instructions">Sincronizacion Copy</string>
+    <string name="sync_progress">No hay sincronizacion en curso.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

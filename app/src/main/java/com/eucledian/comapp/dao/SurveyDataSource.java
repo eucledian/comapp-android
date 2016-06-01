@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -25,6 +27,11 @@ public class SurveyDataSource extends DataSource {
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_DESCRIPTION = "name";
     private static final String TABLE_NAME = "surveys";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_ZONE_ID,
+            COLUMN_NAME
+    };
 
     public SurveyDataSource(){}
 
@@ -40,6 +47,18 @@ public class SurveyDataSource extends DataSource {
         values.put(COLUMN_NAME, element.getName());
         values.put(COLUMN_DESCRIPTION, element.getDescription());
         return getDb().insert(TABLE_NAME, null, values);
+    }
+
+    public ArrayList<Survey> getElements() {
+        Cursor c = getDb().query(TABLE_NAME, columns, null, null, null, null, null, null);
+        ArrayList<Survey> results = new ArrayList<Survey>();
+        Survey el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
     }
 
     public int deleteAllElements(){
