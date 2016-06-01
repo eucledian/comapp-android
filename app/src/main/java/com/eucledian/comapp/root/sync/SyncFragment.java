@@ -203,7 +203,7 @@ public class SyncFragment extends Fragment {
                 zoneDataSource.insertElement(element);
                 insertSurveys((ArrayNode) tmp.get("surveys"));
             }
-            loaded();
+            syncSuccess();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             syncError(getString(R.string.sync_fetch_zones_error));
