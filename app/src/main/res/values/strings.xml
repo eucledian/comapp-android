@@ -40,8 +40,10 @@
 
     <!-- Sync -->
     <string name="sync">Sincronizar</string>
-    <string name="sync_instructions">Sincronizacion Copy</string>
+    <string name="sync_instructions">Antes de sincronizar, asegúrate de contar con una buena conexión a Internet.</string>
     <string name="sync_progress">No hay sincronizacion en curso.</string>
+    <string name="sync_fetch_markers">Obteniendo marcadores</string>
+    <string name="sync_fetch_markers_error">No fue posible recuperar los marcadores</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
