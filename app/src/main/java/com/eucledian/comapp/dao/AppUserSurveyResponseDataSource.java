@@ -40,7 +40,7 @@ public class AppUserSurveyResponseDataSource extends DataSource {
         AppUserSurveyResponse el = new AppUserSurveyResponse();
         int i = 0;
         el.setId(c.getLong(i));
-        el.setAppUserSurveyId(c.getInt(++i));
+        el.setAppUserSurveyId(c.getLong(++i));
         el.setSurveyFieldId(c.getLong(++i));
         el.setResponse(c.getString(++i));
         return el;

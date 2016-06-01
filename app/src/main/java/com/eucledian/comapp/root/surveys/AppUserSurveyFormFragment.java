@@ -18,6 +18,7 @@ import com.eucledian.comapp.model.AppUserSurvey;
 import com.eucledian.comapp.model.AppUserSurveyResponse;
 import com.eucledian.comapp.model.Survey;
 import com.eucledian.comapp.model.SurveyField;
+import com.eucledian.comapp.root.RootActivity;
 import com.eucledian.comapp.util.FieldValidator;
 import com.eucledian.comapp.util.views.EnhancedRecyclerView;
 
@@ -129,12 +130,29 @@ public class AppUserSurveyFormFragment extends Fragment {
         long appUserSurveyId = appUserSurveyDataSource.insertElement(appUserSurvey);
         if(appUserSurveyId == -1){
             app.toast(getString(R.string.app_user_survey_save_error));
+            appUserSurveyDataSource.close();
+            appUserSurveyResponseDataSource.close();
         }
         else{
-
+            saveAppUserResponses(appUserSurveyId);
         }
+    }
+
+    private void saveAppUserResponses(long appUserSurveyId){
+        boolean isValid = true;
+        int count = adapter.getItemCount();
+        for (int i=0; i<count; ++i) {
+            SurveyField surveyField = adapter.getItem(i);
+            AppUserSurveyResponse response = surveyField.getResponse();
+            response.setAppUserSurveyId(appUserSurveyId);
+            long result = appUserSurveyResponseDataSource.insertElement(response);
+            String tmp = "abc";
+        }
+        app.toast(getString(R.string.app_user_survey_save_success));
         appUserSurveyDataSource.close();
         appUserSurveyResponseDataSource.close();
+        RootActivity rootActivity = (RootActivity) getActivity();
+        rootActivity.popToRootFragment();
     }
 
     public Survey getSurvey() {

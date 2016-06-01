@@ -55,6 +55,7 @@
     <!-- App User Surveys -->
     <string name="app_user_survey_submit">Guardar</string>
     <string name="app_user_survey_save_error">No fue posible guardar la encuesta. Por favor intente más tarde.</string>
+    <string name="app_user_survey_save_success">Se ha guardado la encuesta.</string>
 
     <!-- validations -->
     <string name="validation_presence">es requerido</string>

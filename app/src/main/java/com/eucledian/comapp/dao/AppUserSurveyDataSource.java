@@ -17,7 +17,7 @@ public class AppUserSurveyDataSource extends DataSource {
     public static final String CREATE_TABLE = "CREATE TABLE app_user_surveys(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, survey_id)";
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS app_user_surveys";
     private static final String COLUMN_ID = "id";
-    private static final String COLUMN_SURVEY_ID = "id";
+    private static final String COLUMN_SURVEY_ID = "survey_id";
     private static final String TABLE_NAME = "app_user_surveys";
 
     public AppUserSurveyDataSource(){}
