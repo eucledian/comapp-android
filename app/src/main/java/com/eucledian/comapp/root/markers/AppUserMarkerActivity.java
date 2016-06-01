@@ -1,128 +1,99 @@
 package com.eucledian.comapp.root.markers;
 
-import android.Manifest;
-import android.app.Fragment;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.eucledian.comapp.Config;
+import com.eucledian.comapp.App;
 import com.eucledian.comapp.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.eucledian.comapp.dao.AppUserMarkerDataSource;
+import com.eucledian.comapp.dao.ZoneDataSource;
+import com.eucledian.comapp.model.AppUserMarker;
+import com.eucledian.comapp.model.Zone;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.FragmentById;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.WindowFeature;
+
+import java.util.ArrayList;
 
 @EActivity(R.layout.activity_app_user_marker)
-public class AppUserMarkerActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
+public class AppUserMarkerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private GoogleApiClient client;
-    private GoogleMap map;
+    private double lat;
+    private double lng;
 
-    private final int LOCATION_PERMS = 100;
+    private Zone zone;
 
-    @FragmentById
-    protected MapFragment mapFragment;
+    @Bean
+    protected App app;
+
+    @Bean
+    protected AppUserMarkerDataSource dao;
+
+    @Bean
+    protected ZoneDataSource zDao;
+
+    @ViewById
+    protected Spinner spinner;
+
+    @ViewById
+    protected TextView latitudeText;
+
+    @ViewById
+    protected TextView longitudeText;
+
+    private AppUserMarker marker;
 
     @AfterViews
-    protected void init() {
-        initClient();
-        mapFragment.getMapAsync(this);
+    protected void init(){
+        Bundle args = getIntent().getExtras();
+        marker = dao.fromArgs(args);
+        initText();
+        initSpinner();
     }
 
-    private void initClient() {
-        if (client == null) {
-            client = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
+    private void initText(){
+        latitudeText.setText(Double.toString(marker.getLat()));
+        longitudeText.setText(Double.toString(marker.getLng()));
+    }
+
+    private void initSpinner(){
+        zDao.open();
+        ArrayList<Zone> list = zDao.getElements();
+        zDao.close();
+        ArrayAdapter<Zone> adapter = new ArrayAdapter<Zone>(this, android.R.layout.simple_list_item_1, list);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        zone = (Zone) parent.getItemAtPosition(position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        zone = null;
+    }
+
+    @Click
+    protected void submitBtn(){
+        if(zone != null){
+            marker.setZoneId(zone.getId());
+            dao.open();
+            dao.insertElement(marker);
+            dao.close();
+            app.toast(getString(R.string.database_success));
+            app.startRootActivity(this);
         }
-    }
-
-    private void initFragment() {
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, new AppUserMarkerMapFragment_()).commit();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMS);
-            return;
-        }
-        Location location = LocationServices.FusedLocationApi.getLastLocation(client);
-        if (location != null) {
-            setPlace(location);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == LOCATION_PERMS && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            @SuppressWarnings("MissingPermission") Location location = LocationServices.FusedLocationApi.getLastLocation(client);
-            Log.d(Config.LOG_TAG, "Pig!!!" + location.toString());
-            if (location != null) setPlace(location);
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    protected void onStart() {
-        //client.connect();
-        super.onStart();
-    }
-
-    protected void onStop() {
-        client.disconnect();
-        super.onStop();
-    }
-
-
-    public void replaceFragment(Fragment fragment) {
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    private void setPlace(Location location) {
-        LatLng place = new LatLng(location.getLatitude(), location.getLongitude());
-        map.addMarker(new MarkerOptions()
-                .draggable(true)
-                .position(place));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 14));
-    }
-
-    @Override
-    public void onMapReady(GoogleMap map) {
-        this.map = map;
-        client.connect();
     }
 }
