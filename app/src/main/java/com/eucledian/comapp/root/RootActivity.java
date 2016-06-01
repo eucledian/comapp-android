@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.eucledian.comapp.App;
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.AppUser;
+import com.eucledian.comapp.root.markers.MarkersFragment_;
 import com.eucledian.comapp.root.surveys.SurveysFragment_;
 import com.eucledian.comapp.root.sync.SyncFragment_;
 
@@ -131,6 +132,8 @@ public class RootActivity extends AppCompatActivity implements NavigationView.On
                     view = new SyncFragment_();
                     break;
                 case R.id.markers:
+                    view = new MarkersFragment_();
+                    break;
                 default:
                     view = new SurveysFragment_();
                     break;
