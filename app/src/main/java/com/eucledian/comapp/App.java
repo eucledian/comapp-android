@@ -19,8 +19,8 @@ import com.eucledian.comapp.dao.TokenDataSource;
 import com.eucledian.comapp.model.AppUser;
 import com.eucledian.comapp.model.Token;
 import com.eucledian.comapp.root.RootActivity_;
-import com.eucledian.comapp.root.markers.AppUserMarkerActivity;
 import com.eucledian.comapp.root.markers.AppUserMarkerActivity_;
+import com.eucledian.comapp.root.markers.AppUserMarkerMapActivity_;
 import com.eucledian.comapp.splash.LoginActivity_;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -218,6 +218,12 @@ public class App {
 
     public void startRootActivity(Activity context){
         Intent intent = new Intent(context, RootActivity_.class);
+        context.startActivity(intent);
+    }
+
+    public void startAppUserMarkerMapActivity(Activity context, Bundle args){
+        Intent intent = new Intent(context, AppUserMarkerMapActivity_.class);
+        intent.putExtras(args);
         context.startActivity(intent);
     }
 

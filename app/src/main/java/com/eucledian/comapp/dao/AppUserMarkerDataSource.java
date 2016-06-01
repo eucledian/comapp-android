@@ -2,6 +2,7 @@ package com.eucledian.comapp.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Bundle;
 
 import com.eucledian.comapp.model.AppUserMarker;
 
@@ -47,6 +48,27 @@ public class AppUserMarkerDataSource extends DataSource {
         el.setLat(c.getDouble(++i));
         el.setLng(c.getDouble(++i));
         return el;
+    }
+
+
+    public Bundle toArgs(AppUserMarker element){
+        Bundle b = new Bundle();
+        b.putLong(COLUMN_ID, element.getId());
+        b.putLong(COLUMN_MARKER_ID, element.getMarkerId());
+        b.putLong(COLUMN_ZONE_ID, element.getZoneId());
+        b.putDouble(COLUMN_LAT, element.getLat());
+        b.putDouble(COLUMN_LNG, element.getLng());
+        return b;
+    }
+
+    public AppUserMarker fromArgs(Bundle args){
+        AppUserMarker element = new AppUserMarker();
+        element.setId(args.getLong(COLUMN_ID));
+        element.setMarkerId(args.getLong(COLUMN_MARKER_ID));
+        element.setZoneId(args.getLong(COLUMN_ZONE_ID));
+        element.setLat(args.getDouble(COLUMN_LAT));
+        element.setLng(args.getDouble(COLUMN_LNG));
+        return element;
     }
 
 }

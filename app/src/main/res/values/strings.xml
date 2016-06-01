@@ -38,6 +38,10 @@
     <!-- Markers -->
     <string name="markers_empty">No hay marcadores.</string>
 
+    <!-- App User Markers -->
+    <string name="app_user_marker_map">Continuar</string>
+    <string name="app_user_marker_submit">Guardar</string>
+
     <!-- Sync -->
     <string name="sync">Sincronizar</string>
     <string name="sync_instructions">Antes de sincronizar, asegúrate de contar con una buena conexión a Internet.</string>

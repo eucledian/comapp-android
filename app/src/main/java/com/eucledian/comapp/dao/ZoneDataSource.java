@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -43,6 +45,18 @@ public class ZoneDataSource extends DataSource {
             element = cursorToElement(c);
         }
         return element;
+    }
+
+    public ArrayList<Zone> getElements() {
+        Cursor c = getDb().query(TABLE_NAME, columns, null, null, null, null, null, null);
+        ArrayList<Zone> results = new ArrayList<Zone>();
+        Zone el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
     }
 
     public long insertElement(Zone element){

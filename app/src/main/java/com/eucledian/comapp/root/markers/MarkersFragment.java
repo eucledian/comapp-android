@@ -81,6 +81,7 @@ public class MarkersFragment extends Fragment implements RecyclerItemClicked{
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        app.startAppUserMarkerActivity(getActivity(), dao.toArgs(adapter.getItem(position)));
+        app.startAppUserMarkerMapActivity(getActivity(), dao.toArgs(adapter.getItem(position)));
+
     }
 }
