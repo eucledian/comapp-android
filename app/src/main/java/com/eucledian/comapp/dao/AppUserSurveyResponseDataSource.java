@@ -7,6 +7,10 @@ import com.eucledian.comapp.model.AppUserSurveyResponse;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -21,8 +25,38 @@ public class AppUserSurveyResponseDataSource extends DataSource {
     private static final String COLUMN_SURVEY_FIELD_ID = "survey_field_id";
     private static final String COLUMN_RESPONSE = "response";
     private static final String TABLE_NAME = "app_user_survey_responses";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_APP_USER_SURVEY_ID,
+            COLUMN_SURVEY_FIELD_ID,
+            COLUMN_RESPONSE
+    };
 
     public AppUserSurveyResponseDataSource(){}
+
+    public void setParams(Map<String, String> params, ArrayList<AppUserSurveyResponse> elements){
+        Iterator<AppUserSurveyResponse> it = elements.iterator();
+        while (it.hasNext()){
+            AppUserSurveyResponse element = it.next();
+            String fieldNamespace = "app_user_survey_response[" + element.getId() + "]";
+            String response = element.getResponse();
+            if(response == null) response = "";
+            params.put(fieldNamespace + "[survey_field_id]", String.valueOf(element.getSurveyFieldId()));
+            params.put(fieldNamespace + "[response]", response);
+        }
+    }
+
+    public ArrayList<AppUserSurveyResponse> getElementsByAppUserSurvey(long appUserSurveyId) {
+        Cursor c = getDb().query(TABLE_NAME, columns, "app_user_survey_id=" + appUserSurveyId, null, null, null, null, null);
+        ArrayList<AppUserSurveyResponse> results = new ArrayList<AppUserSurveyResponse>();
+        AppUserSurveyResponse el = null;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
+    }
 
     public long insertElement(AppUserSurveyResponse element){
         ContentValues values = new ContentValues();
@@ -34,6 +68,10 @@ public class AppUserSurveyResponseDataSource extends DataSource {
 
     public int deleteAllElements(){
         return getDb().delete(TABLE_NAME, null, null);
+    }
+
+    public int deleteAppUserSurvey(long appUserSurveyId){
+        return getDb().delete(TABLE_NAME, "app_user_survey_id=" + appUserSurveyId, null);
     }
 
     public AppUserSurveyResponse cursorToElement(Cursor c){

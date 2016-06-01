@@ -11,12 +11,17 @@ import com.eucledian.comapp.ApiClientResponse;
 import com.eucledian.comapp.App;
 import com.eucledian.comapp.Config;
 import com.eucledian.comapp.R;
+import com.eucledian.comapp.dao.AppUserMarkerDataSource;
+import com.eucledian.comapp.dao.AppUserSurveyDataSource;
+import com.eucledian.comapp.dao.AppUserSurveyResponseDataSource;
 import com.eucledian.comapp.dao.MarkerDataSource;
 import com.eucledian.comapp.dao.SurveyDataSource;
 import com.eucledian.comapp.dao.SurveyFieldDataSource;
 import com.eucledian.comapp.dao.SurveyFieldOptionDataSource;
 import com.eucledian.comapp.dao.SurveyFieldValidationDataSource;
 import com.eucledian.comapp.dao.ZoneDataSource;
+import com.eucledian.comapp.model.AppUserMarker;
+import com.eucledian.comapp.model.AppUserSurvey;
 import com.eucledian.comapp.model.Marker;
 import com.eucledian.comapp.model.Survey;
 import com.eucledian.comapp.model.SurveyField;
@@ -62,6 +67,15 @@ public class SyncFragment extends Fragment {
     @Bean
     protected SurveyFieldValidationDataSource surveyFieldValidationDataSource;
 
+    @Bean
+    protected AppUserSurveyDataSource appUserSurveyDataSource;
+
+    @Bean
+    protected AppUserSurveyResponseDataSource appUserSurveyResponseDataSource;
+
+    @Bean
+    protected AppUserMarkerDataSource appUserMarkerDataSource;
+
     @ViewById
     protected ProgressBar syncLoadingView;
 
@@ -74,6 +88,8 @@ public class SyncFragment extends Fragment {
     @ViewById
     protected Button syncBtn;
 
+    private Iterator<AppUserSurvey> surveyIterator;
+
     public SyncFragment() {
         // Required empty public constructor
     }
@@ -81,14 +97,118 @@ public class SyncFragment extends Fragment {
     @Click
     protected void syncBtnClicked() {
         loading();
+        syncSurveys();
+    }
+
+    private void syncSurveys(){
+        appUserSurveyDataSource.open();
+        appUserSurveyResponseDataSource.open();
+        ArrayList<AppUserSurvey> surveys = appUserSurveyDataSource.getElements(appUserSurveyResponseDataSource);
+        appUserSurveyDataSource.close();
+        appUserSurveyResponseDataSource.close();
+        setSurveyIterator(surveys.iterator());
+        syncNextSurvey();
+    }
+
+    private void syncNextSurvey(){
+        if(getSurveyIterator().hasNext()){
+            syncSurvey(getSurveyIterator().next());
+        }
+        else{
+            syncMarkers();
+        }
+    }
+
+    private void syncSurvey(final AppUserSurvey appUserSurvey){
+        Map<String, String> params = new HashMap<>();
+        String noticeMessage = getString(R.string.sync_survey);
+        noticeMessage = String.format(noticeMessage, appUserSurvey.getId());
+        setSyncStatusText(noticeMessage);
+        String url = Config.Server.Urls.Surveys.SYNC.replace(":survey_id", String.valueOf(appUserSurvey.getSurveyId()));
+        appUserSurveyResponseDataSource.setParams(params, appUserSurvey.getResponses());
+        app.post(url, params, new ApiClientResponse() {
+            @Override
+            public void onLoading() {
+            }
+
+            @Override
+            public void onLoaded() {
+            }
+
+            @Override
+            public void onSuccess(ObjectNode response) {
+                syncSurveyOnSuccess(response, appUserSurvey);
+            }
+
+            @Override
+            public void onError(VolleyError e) {
+                e.printStackTrace();
+                syncSurveyOnError(appUserSurvey);
+            }
+        }, getActivity());
+    }
+
+    private void syncSurveyOnSuccess(ObjectNode response, AppUserSurvey appUserSurvey){
+        appUserSurveyDataSource.open();
+        appUserSurveyResponseDataSource.open();
+        appUserSurveyDataSource.deleteSurvey(appUserSurvey.getId());
+        appUserSurveyResponseDataSource.deleteAppUserSurvey(appUserSurvey.getId());
+        appUserSurveyDataSource.close();
+        appUserSurveyResponseDataSource.close();
+        syncNextSurvey();
+    }
+
+    private void syncSurveyOnError(AppUserSurvey appUserSurvey){
+        String noticeMessage = getString(R.string.sync_survey_error);
+        noticeMessage = String.format(noticeMessage, appUserSurvey.getId());
+        syncError(noticeMessage);
+    }
+
+    private void syncMarkers(){
+        appUserMarkerDataSource.open();
+        ArrayList<AppUserMarker> elements = appUserMarkerDataSource.getElements();
+        appUserMarkerDataSource.close();
+        Map<String, String> params = new HashMap<>();
+        String noticeMessage = getString(R.string.sync_marker);
+        setSyncStatusText(noticeMessage);
+        String url = Config.Server.Urls.Markers.SYNC;
+        appUserMarkerDataSource.setParams(params, elements);
+        app.post(url, params, new ApiClientResponse() {
+            @Override
+            public void onLoading() {
+            }
+
+            @Override
+            public void onLoaded() {
+            }
+
+            @Override
+            public void onSuccess(ObjectNode response) {
+                syncMarkersOnSuccess(response);
+            }
+
+            @Override
+            public void onError(VolleyError e) {
+                e.printStackTrace();
+                syncMarkersOnError();
+            }
+        }, getActivity());
+    }
+
+    private void syncMarkersOnError(){
+        String noticeMessage = getString(R.string.sync_marker_error);
+        syncError(noticeMessage);
+    }
+
+    private void syncMarkersOnSuccess(ObjectNode response){
+        appUserMarkerDataSource.open();
+        appUserMarkerDataSource.deleteAllElements();
+        appUserMarkerDataSource.close();
         deleteAndFetchMarkers();
     }
 
     private void deleteAndFetchMarkers(){
         setSyncStatusText(getString(R.string.sync_fetch_markers));
-        markerDataSource.open();
-        markerDataSource.deleteAllElements();
-        markerDataSource.close();
         fetchMarkers();
     }
 
@@ -122,6 +242,9 @@ public class SyncFragment extends Fragment {
 
     private void fetchMarkersOnSuccess(ObjectNode response){
         ArrayNode contents = (ArrayNode) response.get("contents");
+        markerDataSource.open();
+        markerDataSource.deleteAllElements();
+        markerDataSource.close();
         try {
             Iterator<JsonNode> it = contents.elements();
             markerDataSource.open();
@@ -281,4 +404,11 @@ public class SyncFragment extends Fragment {
         setSyncStatusText(getString(R.string.sync_progress));
     }
 
+    public Iterator<AppUserSurvey> getSurveyIterator() {
+        return surveyIterator;
+    }
+
+    public void setSurveyIterator(Iterator<AppUserSurvey> surveyIterator) {
+        this.surveyIterator = surveyIterator;
+    }
 }

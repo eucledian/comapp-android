@@ -46,6 +46,10 @@
     <string name="sync">Sincronizar</string>
     <string name="sync_instructions">Antes de sincronizar, asegúrate de contar con una buena conexión a Internet.</string>
     <string name="sync_progress">No hay sincronizacion en curso.</string>
+    <string name="sync_survey">Enviando encuesta %1$d</string>
+    <string name="sync_survey_error">Error sincronizando encuesta %1$d</string>
+    <string name="sync_marker">Enviando marcadores</string>
+    <string name="sync_marker_error">Error sincronizando marcadores</string>
     <string name="sync_fetch_markers">Obteniendo marcadores</string>
     <string name="sync_fetch_markers_error">No fue posible recuperar los marcadores</string>
     <string name="sync_fetch_zones">Obteniendo Zonas</string>

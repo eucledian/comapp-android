@@ -8,6 +8,10 @@ import com.eucledian.comapp.model.AppUserMarker;
 
 import org.androidannotations.annotations.EBean;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Created by gustavo on 5/31/16.
  */
@@ -23,8 +27,41 @@ public class AppUserMarkerDataSource extends DataSource {
     private static final String COLUMN_LAT = "lat";
     private static final String COLUMN_LNG = "lng";
     private static final String TABLE_NAME = "app_user_markers";
+    private String[] columns = {
+            COLUMN_ID,
+            COLUMN_ZONE_ID,
+            COLUMN_MARKER_ID,
+            COLUMN_LAT,
+            COLUMN_LNG
+    };
+
 
     public AppUserMarkerDataSource(){}
+
+    public ArrayList<AppUserMarker> getElements() {
+        Cursor c = getDb().query(TABLE_NAME, columns, null, null, null, null, null, null);
+        ArrayList<AppUserMarker> results = new ArrayList<AppUserMarker>();
+        AppUserMarker el;
+        while (c.moveToNext()){
+            el = cursorToElement(c);
+            results.add(el);
+        }
+        c.close();
+        return results;
+    }
+
+    public void setParams(Map<String, String> params, ArrayList<AppUserMarker> elements){
+        Iterator<AppUserMarker> it = elements.iterator();
+        while (it.hasNext()){
+            AppUserMarker element = it.next();
+            String fieldNamespace = "app_user_marker[" + element.getId() + "]";
+
+            params.put(fieldNamespace + "[zone_id]", String.valueOf(element.getZoneId()));
+            params.put(fieldNamespace + "[marker_id]", String.valueOf(element.getMarkerId()));
+            params.put(fieldNamespace + "[lat]", String.valueOf(element.getLat()));
+            params.put(fieldNamespace + "[lng]", String.valueOf(element.getLng()));
+        }
+    }
 
     public long insertElement(AppUserMarker element){
         ContentValues values = new ContentValues();
