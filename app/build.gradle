@@ -31,6 +31,7 @@ apply plugin: 'android-apt'
 def AAVersion = '4.0.0'
 def JacksonVersion = '2.7.0'
 def SupportVersion = '23.4.0'
+def GapiVersion = '9.0.1'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,4 +47,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.android.support:support-v4:23.4.0'
+    compile "com.google.android.gms:play-services-location:$GapiVersion"
+    compile "com.google.android.gms:play-services-maps:$GapiVersion"
 }

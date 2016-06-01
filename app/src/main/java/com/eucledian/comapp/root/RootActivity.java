@@ -70,8 +70,9 @@ public class RootActivity extends AppCompatActivity implements NavigationView.On
         navHeaderName = (TextView) header.findViewById(R.id.navHeaderName);
         navHeaderMail = (TextView) header.findViewById(R.id.navHeaderMail);
         AppUser user = app.getAppUser();
+        /**
         navHeaderName.setText(user.getFullName());
-        navHeaderMail.setText(user.getMail());
+        navHeaderMail.setText(user.getMail());*/
         // Set navigation listener
         navigationView.setNavigationItemSelectedListener(this);
         // Call first item in menu
