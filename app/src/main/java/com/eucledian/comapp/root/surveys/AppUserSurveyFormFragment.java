@@ -139,14 +139,12 @@ public class AppUserSurveyFormFragment extends Fragment {
     }
 
     private void saveAppUserResponses(long appUserSurveyId){
-        boolean isValid = true;
         int count = adapter.getItemCount();
         for (int i=0; i<count; ++i) {
             SurveyField surveyField = adapter.getItem(i);
             AppUserSurveyResponse response = surveyField.getResponse();
             response.setAppUserSurveyId(appUserSurveyId);
-            long result = appUserSurveyResponseDataSource.insertElement(response);
-            String tmp = "abc";
+            appUserSurveyResponseDataSource.insertElement(response);
         }
         app.toast(getString(R.string.app_user_survey_save_success));
         appUserSurveyDataSource.close();

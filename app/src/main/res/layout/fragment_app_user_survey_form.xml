@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment">
 
-    <TextView
-        android:id="@+id/surveyDescriptionText"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_description"
-        android:textColor="@color/darkGrey" />
+        android:layout_height="match_parent">
 
-    <com.eucledian.comapp.util.views.EnhancedRecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/surveyFieldList"
-        android:name="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
-        tools:listitem="@layout/fragment_app_user_survey_form_item" />
+        <TextView
+            android:id="@+id/surveyDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_description"
+            android:textColor="@color/darkGrey" />
 
-    <Button
+        <com.eucledian.comapp.util.views.EnhancedRecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/surveyFieldList"
+            android:name="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
+            tools:listitem="@layout/fragment_app_user_survey_form_item" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/surveyFormSubmitBtn"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/app_user_survey_submit"
-        android:background="@color/colorAccent"
-        android:textColor="@color/white" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -61,7 +61,7 @@ public class SurveyFieldOptionDataSource extends DataSource {
             SurveyFieldOption tmp = it.next();
             values.add(tmp.getName());
         }
-        return new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, values);
+        return new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, values);
     }
 
     public long insertElement(SurveyFieldOption element){

@@ -16,13 +16,17 @@
         android:id="@+id/surveyFieldEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"/>
 
     <Spinner
         android:visibility="gone"
         android:id="@+id/surveyFieldSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"/>
 
     <TextView
         android:id="@+id/surveyFieldErrorText"
