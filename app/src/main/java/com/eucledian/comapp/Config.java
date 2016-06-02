@@ -69,7 +69,7 @@ public class Config {
         public static final int COMPRESSION = 60; // Image Compression 0 - 100
         // Local
         //public static final String ENDPOINT = "http://192.168.1.106";
-        public static final String ENDPOINT = "http://192.168.1.118";
+        public static final String ENDPOINT = "http://192.168.15.5";
         public static final String PORT = "3000";
         public static final String SCOPE = "";
         // Production
