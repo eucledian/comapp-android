@@ -24,7 +24,7 @@
             android:id="@+id/surveyFieldList"
             android:name="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             tools:context="com.eucledian.comapp.root.surveys.AppUserSurveyFormFragment"
             tools:listitem="@layout/fragment_app_user_survey_form_item" />
@@ -36,6 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:src="@android:drawable/ic_menu_send" />
 
 </android.support.design.widget.CoordinatorLayout>

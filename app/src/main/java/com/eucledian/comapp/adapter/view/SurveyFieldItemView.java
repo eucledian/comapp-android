@@ -3,6 +3,7 @@ package com.eucledian.comapp.adapter.view;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import com.eucledian.comapp.R;
 import com.eucledian.comapp.dao.SurveyFieldOptionDataSource;
 import com.eucledian.comapp.model.SurveyField;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
