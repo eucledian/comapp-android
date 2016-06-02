@@ -1,15 +1,16 @@
 package com.eucledian.comapp.adapter.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.eucledian.comapp.App;
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.Marker;
-import com.eucledian.comapp.model.Survey;
+import com.loopj.android.image.SmartImageView;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
@@ -19,11 +20,14 @@ import org.androidannotations.annotations.ViewById;
 @EViewGroup(R.layout.fragment_markers_item)
 public class MarkerItemView extends LinearLayout {
 
+    @Bean
+    protected App app;
+
     @ViewById
     protected TextView markerNameText;
 
     @ViewById
-    protected ImageView markerIcon;
+    protected SmartImageView markerIcon;
 
     public MarkerItemView(Context context) {
         super(context);
@@ -31,6 +35,7 @@ public class MarkerItemView extends LinearLayout {
 
     public void bind(Marker item){
         markerNameText.setText(item.getName());
-        markerIcon.setImageURI(Uri.parse(item.getIconUrl()));
+        markerIcon.setImageUrl(app.getImageUrl(item.getIconUrl()));
+        //markerIcon.setImageURI(Uri.parse(item.getIconUrl()));
     }
 }

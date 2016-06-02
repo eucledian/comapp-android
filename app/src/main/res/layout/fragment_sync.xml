@@ -11,7 +11,8 @@
         android:text="@string/sync_instructions"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_warning"/>
 
     <TextView
         android:id="@+id/syncStatus"

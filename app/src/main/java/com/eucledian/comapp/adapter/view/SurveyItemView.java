@@ -1,9 +1,12 @@
 package com.eucledian.comapp.adapter.view;
 
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.eucledian.comapp.R;
 import com.eucledian.comapp.model.Survey;
 import com.eucledian.comapp.model.Zone;
@@ -21,7 +24,7 @@ public class SurveyItemView extends LinearLayout {
     protected TextView surveyNameText;
 
     @ViewById
-    protected TextView surveyZoneText;
+    protected ImageView surveyZoneImage;
 
     public SurveyItemView(Context context) {
         super(context);
@@ -31,7 +34,14 @@ public class SurveyItemView extends LinearLayout {
         Zone zone = item.getZone();
         surveyNameText.setText(item.getName());
         if(zone != null){
-            surveyZoneText.setText(zone.getName());
+            ColorGenerator generator = ColorGenerator.DEFAULT;
+            String zoneName = zone.getName();
+            int color = generator.getColor(zoneName);
+            String letter = String.valueOf(zoneName.charAt(0));
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(letter, color)
+                    ;
+            surveyZoneImage.setImageDrawable(drawable);
         }
     }
 }

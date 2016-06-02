@@ -11,10 +11,10 @@
 
     <ImageView
         android:id="@+id/splashLogo"
-        android:layout_width="150dp"
-        android:layout_height="156dp"
-        android:layout_gravity="center_horizontal"
-        android:src="#000000"
+        android:layout_width="269dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_logo_splash"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
