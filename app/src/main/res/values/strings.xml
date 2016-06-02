@@ -66,6 +66,15 @@
     <string name="validation_length_minimum">mínimo %1$d caracteres</string>
     <string name="validation_length_maximum">máximo %1$d caracteres</string>
     <string name="validation_length_is">exactamente %1$d caracteres</string>
+    <string name="validation_numericality">no es número</string>
+    <string name="validation_numericality_only_integer">no es un entero</string>
+    <string name="validation_numericality_odd">no es non</string>
+    <string name="validation_numericality_even">no es par</string>
+    <string name="validation_numericality_equal">no es igual a %1$f</string>
+    <string name="validation_numericality_greater_than">no es mayor a %1$f</string>
+    <string name="validation_numericality_greater_or_equal">no es mayor o igual a %1$f</string>
+    <string name="validation_numericality_less_than">no es menor a %1$f</string>
+    <string name="validation_numericality_less_or_equal">no es menor o igual a %1$f</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
