@@ -36,6 +36,5 @@ public class MarkerItemView extends LinearLayout {
     public void bind(Marker item){
         markerNameText.setText(item.getName());
         markerIcon.setImageUrl(app.getImageUrl(item.getIconUrl()));
-        //markerIcon.setImageURI(Uri.parse(item.getIconUrl()));
     }
 }

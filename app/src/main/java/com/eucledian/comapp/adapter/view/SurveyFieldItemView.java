@@ -3,7 +3,6 @@ package com.eucledian.comapp.adapter.view;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,7 +13,6 @@ import com.eucledian.comapp.R;
 import com.eucledian.comapp.dao.SurveyFieldOptionDataSource;
 import com.eucledian.comapp.model.SurveyField;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -22,7 +20,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 /**
- * Created by gustavo on 6/1/16.
+ * Created by  gustavo on 6/1/16.
  */
 @EViewGroup(R.layout.fragment_app_user_survey_form_item)
 public class SurveyFieldItemView extends LinearLayout {
@@ -51,6 +49,8 @@ public class SurveyFieldItemView extends LinearLayout {
     public void bind(SurveyField item){
         item.setView(this);
         surveyFieldNameText.setText(item.getName());
+        surveyFieldEditText.setVisibility(View.GONE);
+        surveyFieldSpinner.setVisibility(View.GONE);
         switch (item.getIdentity()){
             case SurveyField.Identity.TEXT:
                 setInputView(surveyFieldEditText);
