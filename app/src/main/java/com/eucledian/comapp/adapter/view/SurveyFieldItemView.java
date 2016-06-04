@@ -20,7 +20,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 /**
- * Created by gustavo on 6/1/16.
+ * Created by  gustavo on 6/1/16.
  */
 @EViewGroup(R.layout.fragment_app_user_survey_form_item)
 public class SurveyFieldItemView extends LinearLayout {
@@ -49,6 +49,8 @@ public class SurveyFieldItemView extends LinearLayout {
     public void bind(SurveyField item){
         item.setView(this);
         surveyFieldNameText.setText(item.getName());
+        surveyFieldEditText.setVisibility(View.GONE);
+        surveyFieldSpinner.setVisibility(View.GONE);
         switch (item.getIdentity()){
             case SurveyField.Identity.TEXT:
                 setInputView(surveyFieldEditText);

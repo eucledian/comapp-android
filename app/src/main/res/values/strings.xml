@@ -21,7 +21,7 @@
     <!-- Login -->
     <string name="mail_field">E-mail</string>
     <string name="password_field">Contraseña</string>
-    <string name="login">Iniciar Sessión</string>
+    <string name="login">Iniciar Sesión</string>
 
     <!-- Root -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
